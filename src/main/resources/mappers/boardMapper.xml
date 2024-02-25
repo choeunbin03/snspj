@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snspj.mappers.board">
+
+	<select id="getBbsList" resultType="com.snspj.domain.BoardDTO" parameterType="HashMap">
+		SELECT A.RGTR_ID		AS rgtrId
+			, A.RGTR_DT		AS rgtrDt
+			, A.BBS_PLC		AS bbsPlc
+			, A.BBS_ID		AS bbsId
+			, A.BBS_CN		AS bbsCn
+			, MAX(B.MBR_ID) AS MAX_MBR_ID
+			, MIN(B.MBR_ID) AS MIN_MBR_ID
+			, CASE WHEN B.MBR_ID = #{mbrId} THEN 1 ELSE 0 END AS FLLW_YN1
+			, SUM(CASE WHEN B.MBR_ID = #{mbrId} THEN 1 ELSE 0 END) AS FLLW_YN2
+		FROM TB_BBS A
+		LEFT JOIN TB_FLLW_BBS B ON B.BBS_ID = A.BBS_ID
+		GROUP BY A.BBS_ID, A.BBS_CN
+		HAVING FLLW_YN2 = 1
+	</select>
+	
+	<select id="getBbsView" resultType="com.snspj.domain.BoardDTO" parameterType="java.lang.Integer">
+		SELECT BBS_ID    AS bbsId,
+			BBS_CN        AS bbsCn,
+			ATCH_FILE_NO  AS atchFileNo,
+			BBS_SPT_CNT	  AS bbsSptCnt,
+			BBS_PLC		  AS bbsPlc,
+			RGTR_ID       AS rgtrId,
+			RGTR_DT       AS rgtrDt,
+			MDFR_ID       AS mdfrId,
+			MDFR_DT       AS mdfrDt
+		FROM	TB_BBS
+		WHERE	BBS_ID = #{bbsId}
+	</select>
+
+</mapper>

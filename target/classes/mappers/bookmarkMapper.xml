@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snspj.mappers.bookmark">
+
+	<insert id="bmkPlc" parameterType="HashMap">
+		INSERT INTO TB_BMK
+		( 
+			MBR_ID,
+			BMK_TYPE,
+			BMK_CN,
+			CTGRY_NM,
+			RGTR_ID,
+			RGTR_DT,
+			MDFR_ID,
+			MDFR_DT
+		)
+		VALUES(	#{mbrId},
+				1,
+				#{params},
+				"bmk2",
+				#{mbrId},
+				now(),
+				#{mbrId},
+				now()
+		)
+	</insert>
+	
+	<select id="getCtgryNmList" resultType="java.lang.String" parameterType="HashMap">
+		SELECT DISTINCT CTGRY_NM	AS ctgryNm		FROM TB_BMK		WHERE MBR_ID=#{mbrId}
+	</select>
+
+	<select id="getBmkPlc" resultType="java.lang.String" parameterType="HashMap">
+		SELECT 	BMK_CN AS bmkCn
+		FROM TB_BMK		
+		WHERE MBR_ID=#{mbrId} AND BMK_TYPE=1
+	</select>
+	
+	<select id="bmkListByCtgry" resultType="java.lang.String" parameterType="HashMap">
+		SELECT 	BMK_CN AS bmkCn
+		FROM TB_BMK		
+		WHERE MBR_ID=#{mbrId} AND BMK_TYPE=1 AND CTGRY_NM = #{ctgryNm}
+	</select>
+	
+	<select id="bmkTop" resultType="java.lang.String">
+		SELECT BMK_CN AS bmkCn, 
+		COUNT(BMK_CN) AS COUN 
+		FROM TB_BMK 
+		GROUP BY BMK_CN ORDER BY COUN DESC 
+		LIMIT 15
+	</select>
+</mapper>

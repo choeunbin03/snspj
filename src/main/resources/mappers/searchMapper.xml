@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snspj.mappers.search">
+
+	<select id="getMbrInfo" resultType="com.snspj.domain.MemberDTO" parameterType="java.lang.String">
+			SELECT 
+				MBR_ID AS mbrId,
+				ATCH_FILE_NO AS atchFileNo,
+				MBR_BBS_CNT AS mbrBbsCnt,
+				MBR_FLWR_CNT AS mbrFlwrCnt,
+				MBR_FLWNG_CNT AS mbrFlwngCnt,
+				MBR_INTRCN AS mbrIntrcn
+			FROM TB_MBR
+			WHERE MBR_ID = #{keyWd}
+	</select>
+	
+	<select id="getMbrBbsList" resultType="com.snspj.domain.BoardDTO" parameterType="java.lang.String">
+		SELECT BBS_ID    AS bbsId,
+			BBS_CN        AS bbsCn,
+			ATCH_FILE_NO  AS atchFileNo,
+			BBS_SPT_CNT	  AS bbsSptCnt,
+			BBS_PLC		  AS bbsPlc,
+			RGTR_ID       AS rgtrId,
+			RGTR_DT       AS rgtrDt,
+			MDFR_ID       AS mdfrId,
+			MDFR_DT       AS mdfrDt
+		FROM	TB_BBS
+		WHERE	RGTR_ID = #{keyWd}
+	</select>
+
+</mapper>

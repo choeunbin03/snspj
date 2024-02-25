@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snspj.mappers.member">
+	<select id="login" resultType="com.snspj.domain.MemberDTO" parameterType="com.snspj.domain.MemberDTO">
+		SELECT	MBR_ID AS mbrId,
+				MBR_PWD AS mbrPwd
+		FROM	TB_MBR
+		WHERE	MBR_ID = #{mbrId}
+			AND MBR_PWD = #{mbrPwd}
+	</select>
+	
+	<select id="idDpcnChk" resultType="java.lang.Integer" parameterType="HashMap">
+		SELECT EXISTS (SELECT * FROM TB_MBR WHERE MBR_ID = #{mbrId} LIMIT 1) AS success;
+	</select>
+	
+	<insert id="join" parameterType="com.snspj.domain.MemberDTO">
+		INSERT INTO TB_MBR
+		(
+			MBR_NM,
+			MBR_ID,
+			MBR_PWD,
+			MBR_ROAD_ADDR,
+			MBR_ADDR_DETAIL,
+			MBR_ZIP_NO,
+			MBR_EML_ADDR,
+			MBR_TEL_NO,
+			ATCH_FILE_NO,
+			MBR_FLWR_CNT,
+			MBR_FLWNG_CNT,
+			MBR_BBS_CNT,
+			MBR_INTRCN,
+			MBR_JOIN_YMD,
+			RGTR_ID,
+			RGTR_DT,
+			MDFR_ID,
+			MDFR_DT
+		)
+		VALUES(
+			#{mbrNm},
+			#{mbrId},
+			#{mbrPwd},
+			#{mbrRoadAddr},
+			#{mbrAddrDetail},
+			#{mbrZipNo},
+			"k",
+			1,
+			0,
+			0,
+			0,
+			0,
+			'',
+			now(),
+			#{mbrId},
+			now(),
+			#{mbrId},
+			now()
+		)
+	</insert>
+</mapper>
