@@ -50,4 +50,27 @@
 		GROUP BY BMK_CN ORDER BY COUN DESC 
 		LIMIT 15
 	</select>
+	
+	<insert id="bmkBbs" parameterType="HashMap">
+		INSERT INTO TB_BMK
+		( 
+			MBR_ID,
+			BMK_TYPE,
+			BMK_CN,
+			CTGRY_NM,
+			RGTR_ID,
+			RGTR_DT,
+			MDFR_ID,
+			MDFR_DT
+		)
+		VALUES(	#{mbrId},
+				0,
+				#{bbsId},
+				null,
+				#{mbrId},
+				now(),
+				#{mbrId},
+				now()
+		)
+	</insert>
 </mapper>

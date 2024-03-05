@@ -7,7 +7,7 @@
 	<select id="getMbrInfo" resultType="com.snspj.domain.MemberDTO" parameterType="java.lang.String">
 			SELECT 
 				MBR_ID AS mbrId,
-				ATCH_FILE_NO AS atchFileNo,
+				MBR_PROFL_PATH AS mbrProflPath,
 				MBR_BBS_CNT AS mbrBbsCnt,
 				MBR_FLWR_CNT AS mbrFlwrCnt,
 				MBR_FLWNG_CNT AS mbrFlwngCnt,

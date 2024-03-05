@@ -28,5 +28,6 @@ public class BoardServiceImpl implements BoardService{
 		BoardDTO bbsView = boardDao.getBbsView(bbsId);
 		return bbsView;
 	}
+
 	
 }

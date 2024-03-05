@@ -45,5 +45,10 @@ public class BookmarkDAOImpl implements BookmarkDAO{
 		return result;
 	}
 
+	@Override
+	public void bmkBbs(Map<String, Object> bmkParam) {
+		sqlSession.insert(namespace+".bmkBbs", bmkParam);
+	}
+
 	
 }

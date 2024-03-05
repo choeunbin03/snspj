@@ -29,7 +29,7 @@
 	<form id="bbsViewfrm">
 		<input type="hidden" value="${bbsView.bbsId}" name="bbsId" id="bbsId">
 		
-		<button type="button" onclick='fn_addBookmark()'>북마크</button>	
+		<button type="button" onclick='fn_bmkBbs()'>북마크</button>	
 		<div>작성자 : ${bbsView.rgtrId}</div>
 		<div>등록일 : ${bbsView.rgtrDt}</div>
 		<!-- <div>첨부파일</div>	-->
@@ -38,6 +38,7 @@
 		<!-- 댓글~~ -->
 	</form>
 		<button type="button" value="좋아요" onclick='fn_updateBbsSpt(${bbsView.bbsId})'></button>
+		<div>좋아요 수: ${bbsView.bbsSptCnt}</div>
 		<button type="button" onclick='fn_goBackPg()'>X</button><!-- 일단 기능 구현하고 위치 수정. -->
 		
 	<%-- 	<%@ include file="../comment/cmntList.jsp" %>

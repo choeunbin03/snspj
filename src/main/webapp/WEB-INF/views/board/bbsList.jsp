@@ -15,6 +15,8 @@
 		
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="${path}/resources/js/board.js" type="text/javascript" defer="defer"></script>
+	<script src="${path}/resources/js/bookmark.js" type="text/javascript" defer="defer"></script>
+	
 	
 </head>
 <body>
@@ -29,8 +31,8 @@
 						<td><c:out value="${bbsList.rgtrId}" /></td>
 						<td><fmt:formatDate pattern="yyyy/MM/dd" value="${bbsList.rgtrDt}" /></td>
 						<!-- 첨부파일 자리 -->
-						<!-- 좋아요 자리 -->
-						<!-- 북마크 자리 -->
+						<td><button type="button" onclick="fn_updateBbsSpt(${bbsList.bbsId})">좋아요</button></td>
+						<td><button type="button" onclick="fn_bmkBbs(${bbsList.bbsId})">북마크</button></td>
 						<td><a href="#" onclick="fn_goPlcView(${bbsList.bbsPlc})">${bbsList.bbsPlc}</a></td>
 						<td><a href="/board/bbsView?bbsId=${bbsList.bbsId}">${bbsList.bbsCn}</a></td>
 					</tr>

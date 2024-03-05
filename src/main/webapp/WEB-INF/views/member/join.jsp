@@ -11,9 +11,14 @@
 <script src="${path}/resources/js/popup.js" defer="defer"></script>
 
 <title>Insert title here</title>
+	<style>
+		.img_wrap {width:350px; height:350px; overflow:hidden; margin:0 auto;}
+		#profileImg {width:100%; height:100%;}
+	</style>
+
 </head>
 <body>
-	<form id="joinFrm">
+	<form id="joinFrm" enctype="multipart/form-data">
 		
 		<div class="joinInput">
 			<label class="control-label" for="mbrNm">이름 입력: </label>
@@ -57,9 +62,40 @@
 			<button class="cencle btn btn-danger" type="button">취소</button>
 		</div>
 		
+		<div class="img_wrap">
+			<img id="profileImg" />
+		</div>
+		
 	</form>
 	
-	
+<script type="text/javascript">
+    //이미지 미리보기
+    var sel_file;
+ 
+    $(document).ready(function() {
+        $("#fileupload").on("change", handleImgFileSelect);
+    });
+ 
+    function handleImgFileSelect(e) {
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+ 
+        var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+ 
+        filesArr.forEach(function(f) { 
+            sel_file = f;
+ 
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#img").attr("src", e.target.result);
+            }
+            reader.readAsDataURL(f);
+        });
+    }
+</script>
+
+
+<!-- 	
 <script>
 	$(document).ready(function() {
 	    $("#fileupload").on("change", addFiles);
@@ -91,6 +127,6 @@
 		}
 
 
-</script>
+</script> -->
 </body>
 </html>

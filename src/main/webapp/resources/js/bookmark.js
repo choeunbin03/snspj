@@ -17,3 +17,19 @@ function fn_addBookmark(bmkParam, cnt){
 		}
 	});
 }
+
+function fn_bmkBbs(bbsId){
+	
+	$.ajax({
+		type: "GET",
+		url: "/bookmark/bmkBbs",
+		data: {bbsId: bbsId},
+		success: function(data){
+			location.reload();
+		},
+		error: function(data){
+			alert("실패");
+			console.log(data);
+		}
+	});
+}

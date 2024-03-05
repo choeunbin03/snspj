@@ -12,7 +12,7 @@ public class MemberDTO {
 	private int mbrZipNo;//우편번호
 	private String mbrEmlAddr;//회원 이메일주소
 	private int mbrTelNo;//회원 전화번호
-	private int atchFileNo;//첨부파일 번호(프로필 사진)
+	private String mbrProflPath;//첨부파일 번호(프로필 사진)
 	private int mbrFlwrCnt;//팔로워 수
 	private int mbrFlwngCnt;//팔로잉 수
 	private int mbrBbsCnt;//내 게시물 수
@@ -66,11 +66,11 @@ public class MemberDTO {
 	public void setMbrTelNo(int mbrTelNo) {
 		this.mbrTelNo = mbrTelNo;
 	}
-	public int getAtchFileNo() {
-		return atchFileNo;
+	public String getMbrProflPath() {
+		return mbrProflPath;
 	}
-	public void setAtchFileNo(int atchFileNo) {
-		this.atchFileNo = atchFileNo;
+	public void setMbrProflPath(String mbrProflPath) {
+		this.mbrProflPath = mbrProflPath;
 	}
 	public int getMbrFlwrCnt() {
 		return mbrFlwrCnt;

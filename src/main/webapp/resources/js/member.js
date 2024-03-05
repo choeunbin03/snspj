@@ -25,9 +25,8 @@ function fn_join(){
 	var createForm = document.getElementById("joinFrm");
 	var formData = new FormData(createForm );
 	
-	for(var i=0, filesTempArrLen = filesTempArr.length; i<filesTempArrLen; i++) {
-   		formData.append("files", filesTempArr[i]);
-	}
+	formData.append( "fileupload", $("#fileupload")[0].files[0] );
+	
 
 	
 	if( $("#mbrId").attr("readonly") != 'readonly' ){ // 중복검사를 하지 않은 경우
@@ -63,43 +62,6 @@ function fn_join(){
 	});
 	
 }
-
-/*
-function fn_join(){
-	var params = $("#joinFrm").serializeArray();
-	
-	if( $("#mbrId").attr("readonly") != 'readonly' ){ // 중복검사를 하지 않은 경우
-		alert("아이디 중복검사는 필수 입니다.");
-		$("mbrId").focus();
-		return;
-	}else if( $("#mbrPwd").val() == '' || $("#chkMbrPwd").val() == '' || ( $("#mbrPwd").val() != $("#chkMbrPwd").val() )){
-		alert("비밀번호를 확인해주세요.");
-	}else if ( $("#mbrNm").val() == ''){
-		alert("이름은 필수 입니다");
-		$("#mbrNm").focus();
-		return;
-	}	
-	
-	$.ajax({
-		type : "POST",
-		url : "/member/join",
-		data : params,
-		success : function(data){
-			if(data == "Y"){
-				alert("회원가입이 완료되었습니다.");
-				location.href = "/";
-			}else{
-				alert("회원가입이 실패되었습니다.");
-			}
-		},
-		error: function(data){
-			alert("문제가 발생하였습니다.");
-			console.log(data);
-		}
-	});
-	
-}
-*/
 
 function idDpcnChk(){
 	var mbrId = $("#mbrId").val();

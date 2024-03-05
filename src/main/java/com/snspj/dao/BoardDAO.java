@@ -11,5 +11,4 @@ public interface BoardDAO {
 	public List<BoardDTO> getBbsList(Map<String, Object> params);
 	public BoardDTO getBbsView(int bbsId);
 
-	
 }

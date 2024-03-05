@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snspj.mappers.spt">
+
+	<select id="checkBbsSptYn" resultType="java.lang.Integer" parameterType="HashMap">
+		SELECT
+			EXISTS(SELECT 1
+			FROM TB_SPT
+			WHERE MBR_ID = #{mbrId} AND BBS_ID = #{bbsId})
+	</select>
+	
+	<update id="updateBbsSpt" parameterType="java.lang.Integer">
+		UPDATE TB_BBS
+		SET
+			BBS_SPT_CNT = IFNULL(BBS_SPT_CNT, 0) + 1
+		WHERE
+			BBS_ID = #{bbsId}
+	</update>
+	
+	<insert id="insertSptTb" parameterType="HashMap">
+		INSERT INTO TB_SPT
+		(
+			BBS_ID,
+			MBR_ID
+		)
+		VALUES( #{bbsId},
+				#{mbrId}	
+		)	
+	</insert>
+	
+</mapper>

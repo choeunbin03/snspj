@@ -43,5 +43,10 @@ public class BookmarkServiceImpl implements BookmarkService{
 		List<String> result = bookmarkDao.bmkTop();
 		return result;
 	}
+
+	@Override
+	public void bmkBbs(Map<String, Object> bmkParam) {
+		bookmarkDao.bmkBbs(bmkParam);
+	}
 	
 }

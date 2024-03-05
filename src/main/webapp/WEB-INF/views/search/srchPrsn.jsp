@@ -11,7 +11,7 @@
 		#totalContainer {display:flex; height:100%;}
 		#srchContent {width:250px; display:block; border-right:1px solid #E2E2E2; height:100%; overflow:auto;}
 		#srchResult {width:65%; height:100%;}
-		
+		#srchResultProfile {width:200px; height:200px;} 
 	</style>
 	
 	<link rel="stylesheet" href="${path}/resources/css/moduleStyle.css">
@@ -45,6 +45,7 @@
 		
 		<div id="srchResult">
 			<div id="mbrContent">
+				<img id="srchResultProfile" src="/search/display?path=${srchMbrInfo.mbrProflPath}">
 				<div>${srchMbrInfo.mbrId}</div>
 				<div>게시물 ${srchMbrInfo.mbrBbsCnt}	팔로워 ${srchMbrInfo.mbrFlwrCnt}	팔로우 ${srchMbrInfo.mbrFlwngCnt}</div>
 				<div>${srchMbrInfo.mbrIntrcn}</div>
@@ -72,7 +73,12 @@
 			
 	</div><!-- totalContainer -->
 	
-
+<%-- 이거 때문에,,,, 굉장히 고생함. 화면을 비워주기 때문에 조심해주기. servlet이 충돌됐다고 오류 떴을 때 넣었지만
+	 나중에 코드 수정하고 나서 빈 화면 뜨면 이거 지우기,,,,,,
+	<% 
+		out.clear();
+		out=pageContext.pushBody();
+	%> --%>
 
 <script>
 	var srchSlideBtn = document.querySelector('#srchSlideBtn');
@@ -87,6 +93,7 @@
 			srchSlideBtn.innerText = '>';
 		}
 	})
+
 </script>
 
 

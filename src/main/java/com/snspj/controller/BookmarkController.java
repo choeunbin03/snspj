@@ -38,5 +38,20 @@ public class BookmarkController {
 		
 		bookmarkService.bmkPlc(bmkParam);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/bmkBbs", method=RequestMethod.GET)
+	public void bmkBbs(Locale locale, Model model, HttpSession session, HttpServletRequest request) throws Exception{
+		String mbrId = (String)session.getAttribute("sessionId");
+		int bbsId = Integer.parseInt((String)request.getParameter("bbsId"));
+		Map<String, Object> bmkParam = new HashMap<>();	
+		
+		bmkParam.put("mbrId", mbrId);
+		bmkParam.put("bbsId", bbsId);
+		
+		//bmk 되어있는지 체크
+		
+		bookmarkService.bmkBbs(bmkParam);
+	}
 
 }

@@ -11,5 +11,6 @@ public interface BookmarkDAO {
 	public List<String> bmkListByCtgry(Map<String, Object> param);
 	public List<String> bmkTop();
 
+	public void bmkBbs(Map<String, Object> bmkParam);
 
 }

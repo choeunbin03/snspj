@@ -1,5 +1,6 @@
 package com.snspj.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -73,14 +74,28 @@ public class MemberController {
 							@RequestParam("fileupload")MultipartFile fileupload, HttpServletRequest request) throws Exception {
 		int result = -1;
 		
-		String webPath = "/resources/images/memberProfile/";
 		
-		String folderPath = request.getSession().getServletContext().getRealPath(webPath);
-		//프로필 이미지와 게시물 첨부파일은 따로??
-		//	프로필: tb_mbr에 atch_no 대신 atch_path로 저장?(왜냐면 프로필은 하나,,)
-			//	https://yjdawn.tistory.com/151
-		//	게시물: 따로
+		//파일 저장 위치는 프로젝트 외부에 폴더 생성하여 거기에 저장. 또한 경로는 절대경로!
+		//String webPath = "resources\\upload\\memberProfile\\";
+		//String folderPath = "D:\\PJ\\JSP_SNS_PJ\\workspace\\snspj\\src\\main\\webapp\\resources\\upload\\memberProfile\\";
 		
+		String folderPath = "D:\\PJ\\JSP_SNS_PJ\\upload\\memberProfile\\";
+		
+		//프로필 이미지와 게시물 첨부파일은 따로
+		//프로필 이미지 이름: 회원가입 아이디
+		String orgFileNm = fileupload.getOriginalFilename();
+		String uploadFileName = memberDto.getMbrId() + orgFileNm.substring(orgFileNm.indexOf('.'));
+		
+		try {
+			if(!fileupload.isEmpty()) {
+				File saveFile = new File(folderPath, uploadFileName);
+				fileupload.transferTo(saveFile);
+				memberDto.setMbrProflPath(uploadFileName);
+			}
+			
+		}catch(Exception e) {
+			memberDto.setMbrProflPath(null);
+		}
 		
 		result = memberService.join(memberDto);
 		
