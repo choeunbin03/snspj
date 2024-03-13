@@ -20,12 +20,15 @@ function fn_login(){
 }
 
 function fn_join(){
-	var params = $("#joinFrm").serializeArray();
+//	var params = $("#joinFrm").serializeArray();
 	
 	var createForm = document.getElementById("joinFrm");
 	var formData = new FormData(createForm );
 	
 	formData.append( "fileupload", $("#fileupload")[0].files[0] );
+	
+//	$("#mbrRoadAddr").val("a");
+	//$("#mbrZipNo").val(1);
 	
 
 	
@@ -35,6 +38,8 @@ function fn_join(){
 		return;
 	}else if( $("#mbrPwd").val() == '' || $("#chkMbrPwd").val() == '' || ( $("#mbrPwd").val() != $("#chkMbrPwd").val() )){
 		alert("비밀번호를 확인해주세요.");
+		$("#mbrPwd").focus();
+		return;
 	}else if ( $("#mbrNm").val() == ''){
 		alert("이름은 필수 입니다");
 		$("#mbrNm").focus();

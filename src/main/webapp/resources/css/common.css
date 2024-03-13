@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+* {
+    box-sizing: border-box;
+    font-family: 'helvetica neue', 'Apple SD Gothic Neo', Roboto, Helvetica, Arial, sans-serif;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+    background-color: #fafafa;
+    padding: 0;
+    margin: 0;
+}
+
+p, span {
+    font-size: 14px;
+}
+
+.feedadd {
+    width: 27px;
+    height: 27px;
+    margin-left: 15px;
+    all: unset;
+}

@@ -11,7 +11,9 @@
 	
 	</style>
 	
+	<link rel="stylesheet" href="${path}/resources/css/common.css">
 	<link rel="stylesheet" href="${path}/resources/css/moduleStyle.css">
+	<link rel="stylesheet" href="${path}/resources/css/bbsStyle.css">
 		
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="${path}/resources/js/board.js" type="text/javascript" defer="defer"></script>
@@ -21,6 +23,11 @@
 </head>
 <body>
 	<%@ include file="../module/side.jsp" %>
+	
+	<div class="flex-center logo-wrapper">
+		<span class="logo-text">shareTable</span>
+	</div>
+	
 	<div id="bbsContent">
 		<br>		
 		<br>		

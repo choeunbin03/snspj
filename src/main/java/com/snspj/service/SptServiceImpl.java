@@ -15,8 +15,8 @@ public class SptServiceImpl implements SptService{
 	private SptDAO sptDao;
 
 	@Override
-	public int checkBbsSptYn(Map<String, Object> params) {
-		int result = sptDao.checkBbsSptYn(params);
+	public boolean checkBbsSptYn(Map<String, Object> params) {
+		boolean result = sptDao.checkBbsSptYn(params);
 		return result;
 	}
 

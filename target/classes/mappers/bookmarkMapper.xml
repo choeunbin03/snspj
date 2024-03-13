@@ -46,7 +46,7 @@
 	<select id="bmkTop" resultType="java.lang.String">
 		SELECT BMK_CN AS bmkCn, 
 		COUNT(BMK_CN) AS COUN 
-		FROM TB_BMK 
+		FROM TB_BMK WHERE BMK_TYPE=1
 		GROUP BY BMK_CN ORDER BY COUN DESC 
 		LIMIT 15
 	</select>

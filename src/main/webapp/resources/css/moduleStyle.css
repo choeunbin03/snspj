@@ -33,13 +33,21 @@
 	
 	a {text-decoration:none;color:inherit;}
 	.clear{clear:both;}
-	#sideContainer{background-color:white; width:100%; border-right:1px solid #E2E2E2; height:100%;}
+	#sideContainer{
+		background-color:white; 
+		width:100%; 
+		border-right:1px solid #E2E2E2; 
+		height:100%;
+		display: flex;
+		align-items:center;
+	}
 	
 	/*v1*/
 	#nav-v1{width:100px;text-align:center;}
 	.menu-v1{
 		line-height:2;
-		border:1px solid #222;
+		border:none;
+		margin: 20px 0;
 	}
 	.menu-v1:hover{background-color:#000;}
 	.menu-v1:hover>a{color:white;font-weight:bold;}

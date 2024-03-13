@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.logo-text {
+	font-family: fantasy;
+	font-size: 40px;
+	margin-top: 50px;
+	color: #9B9BB5;
+	padding: 10px;
+}

@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+html {
+	height: 100%;
+}
+body {
+	background-color: #fafafa);
+	height: 100%;
+}
+.login-container {
+	display: flex;
+}
+
+.mainImg {
+	display: flex;
+	justify-content: center;
+	margin: 131px 30px;
+}
+
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.login-content {
+	background-color: white;
+	width: 380px;
+	height: 500px;
+	border: 1px solid lightgray;
+}
+.logo-text {
+	font-family: fantasy;
+	font-size: 55px;
+	margin-top: 50px;
+	color: #9B9BB5;
+}
+.input-wrapper {
+	margin-top: 60px;
+}
+.login-wrapper {
+	margin-left: 40px;
+	margin-right: 40px;
+	margin-bottom: 5px;
+}
+.login-input {
+	font-size: 14px;
+	width: 330px;
+	height: 40px;
+	background-color: rgba(0, 0, 0, 0.035);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	padding-left: 10px;
+}
+.login-button, .join-button {
+	width: 100%;
+	font-size: 15px;
+	color: white;
+	font-weight: bold;
+	background-color: #9B9BB5;
+	border: none;
+	border-radius: 5px;
+	padding: 9px;
+}
+.info-wrapper {
+	margin-left: 40px;
+ 	margin-right: 40px;
+	margin-bottom: 5px;
+}
+.button-wrapper {
+	border: none;
+	margin: 15px 40px;
+}
+.joinBox {
+	margin-top: 80px;
+	font-size: 13px;
+	color: #5F5F5F;
+}

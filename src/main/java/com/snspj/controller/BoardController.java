@@ -44,6 +44,8 @@ public class BoardController {
 		params.put("mbrId", mbrId);
 		
 		List bbsList = boardService.getBbsList(params);
+		//좋아요 여부 체크
+		//북마크 여부 체크
 		
 		model.addAttribute("bbsList", bbsList);
 		
@@ -66,7 +68,7 @@ public class BoardController {
 	public void updateBbsSpt(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		String mbrId = (String)session.getAttribute("sessionId");
 		int bbsId = Integer.parseInt((String)request.getParameter("bbsId"));
-		int bbsSptYn = 0;
+		boolean bbsSptYn = false;
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("bbsId", bbsId);
@@ -74,7 +76,7 @@ public class BoardController {
 		
 		bbsSptYn = sptService.checkBbsSptYn(params);
 		
-		if(bbsSptYn == 0) {//좋아요를 안 누른 상태라면~
+		if(bbsSptYn == false) {//좋아요를 안 누른 상태라면~
 			sptService.updateBbsSpt(bbsId);
 			sptService.insertSptTb(params);
 		}

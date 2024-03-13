@@ -17,8 +17,12 @@ public class SptDAOImpl implements SptDAO{
 
 
 	@Override
-	public int checkBbsSptYn(Map<String, Object> params) {
-		int result = sqlSession.selectOne(namespace+".checkBbsSptYn", params);
+	public boolean checkBbsSptYn(Map<String, Object> params) {
+		boolean result = false;
+		int checkBbsSptYn = sqlSession.selectOne(namespace+".checkBbsSptYn", params);
+		if(checkBbsSptYn == 1) {//좋아요 누름
+			result = true;
+		}
 		return result;
 	}
 

@@ -83,11 +83,12 @@ public class MemberController {
 		
 		//프로필 이미지와 게시물 첨부파일은 따로
 		//프로필 이미지 이름: 회원가입 아이디
-		String orgFileNm = fileupload.getOriginalFilename();
-		String uploadFileName = memberDto.getMbrId() + orgFileNm.substring(orgFileNm.indexOf('.'));
 		
 		try {
 			if(!fileupload.isEmpty()) {
+				String orgFileNm = fileupload.getOriginalFilename();
+				String uploadFileName = memberDto.getMbrId() + orgFileNm.substring(orgFileNm.indexOf('.'));
+				
 				File saveFile = new File(folderPath, uploadFileName);
 				fileupload.transferTo(saveFile);
 				memberDto.setMbrProflPath(uploadFileName);
@@ -97,7 +98,7 @@ public class MemberController {
 			memberDto.setMbrProflPath(null);
 		}
 		
-		result = memberService.join(memberDto);
+		result = memberService.join(memberDto);//주소란 정보가 하나라도 null이면 그냥 null값 저장.
 		
 		if( result == 1) {
 			return "Y";
