@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snspj.mappers.atchFile">
+
+	<select id="getMaxAtchFileNo" resultType="java.lang.Integer">
+		SELECT IFNULL(MAX(ATCH_FILE_NO), 0) FROM TB_ATCH_FILE
+	</select>
+	
+	<select id="getMaxAtchFileSeq" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		SELECT IFNULL(MAX(ATCH_FILE_SEQ), 0) FROM TB_ATCH_FILE WHERE ATCH_FILE_NO=#{atchFileNo}
+	</select>
+	
+	<insert id="saveInfo" parameterType="HashMap">
+		INSERT INTO TB_ATCH_FILE
+		( 
+			ATCH_FILE_NO,
+			ATCH_FILE_SEQ,
+			ATCH_FILE_PATH,
+			ATCH_FILE_NM,
+			ATCH_FILE_ORG_NM,
+			ATCH_FILE_SIZE,
+			RGTR_ID,
+			RGTR_DT,
+			MDFR_ID,
+			MDFR_DT
+		)
+		VALUES(	#{atchFileNo},
+				#{atchFileSeq},
+				#{fileUrl},
+				#{fileNm},
+				#{orgFileNm},
+				0,
+				#{mbrId},
+				now(),
+				#{mbrId},
+				now()
+		)
+	</insert>
+	
+	<select id="getFileList" resultType="com.snspj.domain.AtchFileDTO" parameterType="HashMap">
+		SELECT B.ATCH_FILE_NO AS atchFileNo,
+				B.ATCH_FILE_SEQ AS atchFileSeq,
+				B.ATCH_FILE_PATH AS atchFilePath,
+				B.ATCH_FILE_NM AS atchFileNm,
+				B.ATCH_FILE_ORG_NM AS atchFileOrgNm,
+				B.ATCH_FILE_SIZE AS atchFileSize
+		FROM
+		(
+			SELECT A.*
+			FROM TB_BBS A
+			WHERE RGTR_ID IN 
+				(
+					SELECT A.FLWR_ID
+					FROM TB_FLLW A
+					WHERE MBR_ID = #{mbrId}
+				)
+		)A
+		LEFT JOIN TB_ATCH_FILE B ON A.ATCH_FILE_NO = B.ATCH_FILE_NO
+		ORDER BY A.BBS_ID DESC
+	</select>
+
+</mapper>

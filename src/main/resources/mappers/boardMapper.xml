@@ -10,14 +10,16 @@
 			, A.BBS_PLC		AS bbsPlc
 			, A.BBS_ID		AS bbsId
 			, A.BBS_CN		AS bbsCn
-			, MAX(B.MBR_ID) AS MAX_MBR_ID
-			, MIN(B.MBR_ID) AS MIN_MBR_ID
-			, CASE WHEN B.MBR_ID = #{mbrId} THEN 1 ELSE 0 END AS FLLW_YN1
-			, SUM(CASE WHEN B.MBR_ID = #{mbrId} THEN 1 ELSE 0 END) AS FLLW_YN2
+			, A.BBS_SPT_CNT		AS bbsSptCnt
+			, A.ATCH_FILE_NO	AS atchFileNo
 		FROM TB_BBS A
-		LEFT JOIN TB_FLLW_BBS B ON B.BBS_ID = A.BBS_ID
-		GROUP BY A.BBS_ID, A.BBS_CN
-		HAVING FLLW_YN2 = 1
+		WHERE RGTR_ID IN
+		(
+			SELECT A.FLWR_ID
+			FROM TB_FLLW A
+			WHERE MBR_ID = #{mbrId}
+		)
+		ORDER BY A.BBS_ID DESC
 	</select>
 	
 	<select id="getBbsView" resultType="com.snspj.domain.BoardDTO" parameterType="java.lang.Integer">
@@ -33,5 +35,34 @@
 		FROM	TB_BBS
 		WHERE	BBS_ID = #{bbsId}
 	</select>
+	
+	<select id="getMaxBbsId" resultType="java.lang.Integer">
+		SELECT IFNULL(MAX(BBS_ID), 0) FROM TB_BBS
+	</select>
+	
+	<insert id="regiBbs" parameterType="com.snspj.domain.BoardDTO">
+		INSERT INTO TB_BBS 
+		( 
+			BBS_ID,
+			BBS_CN,
+			ATCH_FILE_NO,
+			BBS_SPT_CNT,
+			BBS_PLC,
+			RGTR_ID,
+			RGTR_DT,
+			MDFR_ID,
+			MDFR_DT
+		)
+		VALUES(	#{bbsId},
+				#{bbsCn},
+				#{atchFileNo},
+				0,
+				null,
+				#{rgtrId},
+				now(),
+				#{rgtrId},
+				now()
+		)
+	</insert>
 
 </mapper>

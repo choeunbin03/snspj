@@ -29,5 +29,12 @@ public class BoardServiceImpl implements BoardService{
 		return bbsView;
 	}
 
+	@Override
+	public void regiBbs(BoardDTO boardDto) {
+		int bbsId = boardDao.getMaxBbsId() + 1;
+		boardDto.setBbsId(bbsId);
+		boardDao.regiBbs(boardDto);
+	}
+
 	
 }

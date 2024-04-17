@@ -1,5 +1,6 @@
 package com.snspj.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -21,15 +22,38 @@ public class SptServiceImpl implements SptService{
 	}
 
 	@Override
-	public void updateBbsSpt(int bbsId) {
-		sptDao.updateBbsSpt(bbsId);		
+	public void addBbsSpt(int bbsId) {
+		sptDao.addBbsSpt(bbsId);		
 	}
 
 	@Override
-	public void insertSptTb(Map<String, Object> params) {
-		sptDao.insertSptTb(params);	
+	public void addSpt(Map<String, Object> params) {
+		sptDao.addSpt(params);	
 		
 	}
+
+	@Override
+	public void removeBbsSpt(int bbsId) {
+		sptDao.removeBbsSpt(bbsId);
+	}
+
+	@Override
+	public void removeSpt(Map<String, Object> params) {
+		sptDao.removeSpt(params);	
+	}
+
+	@Override
+	public List<String> sptYnBbsList(Map<String, Object> params) {
+		List<String> result = sptDao.sptYnBbsList(params);	
+		return result;
+	}
+
+	@Override
+	public List<String> sptYnSrch(Map<String, Object> params) {
+		List<String> result = sptDao.sptYnSrch(params);	
+		return result;
+	}
+
 	
 
 }

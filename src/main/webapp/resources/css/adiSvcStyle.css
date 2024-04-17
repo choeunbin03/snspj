@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.main-content {
+    left: 100px;
+    width: calc(100% - 100px);
+    height: 100%;
+    justify-content: center;
+    position: absolute;
+    background: white;
+}
+
+#bmkTopContainer {
+    overflow: auto;
+    display: flex;
+}

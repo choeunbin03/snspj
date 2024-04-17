@@ -6,13 +6,15 @@
 }
 
 html {
-	height: 100%;
 }
 
 body {
     background-color: #fafafa;
     padding: 0;
     margin: 0;
+    position: relative;
+    width: 100%;
+    display: flex;
 }
 
 p, span {
@@ -24,4 +26,23 @@ p, span {
     height: 27px;
     margin-left: 15px;
     all: unset;
+}
+
+table, tr, td {
+	border: none;
+	height: 100%;
+}
+
+.logo-wrapper {
+	width: 100%;
+	height: 100px;
+	box-sizing: border-box;
+}
+
+.logo-text {
+	font-family: fantasy;
+	font-size: 40px;
+	margin-top: 50px;
+	color: #9B9BB5;
+	padding: 10px;
 }

@@ -12,5 +12,9 @@ public interface BookmarkService {
 	public List<String> bmkTop();
 
 	
-	public void bmkBbs(Map<String, Object> bmkParam);
+	public void addBmkBbs(Map<String, Object> bmkParam);
+	public void removeBmkBbs(Map<String, Object> bmkParam);
+	public List<String> bmkYnBbsList(Map<String, Object> params);
+	public List<String> bmkYnSrch(Map<String, Object> params);
+
 }

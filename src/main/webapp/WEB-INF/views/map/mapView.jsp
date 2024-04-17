@@ -8,13 +8,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<style type="text/css">
-		#totalContainer {display:flex; height:100%;}
-		#bmkCtgry {width:350px; display:none; border-right:1px solid #E2E2E2; height:100%; overflow:auto;}
-		#mapContent {width:100%; height:95%;}
+		.totalContainer {display:flex; height:100%;}
+		#bmkCtgry-wrapper {width:350px; display:none; border-right:1px solid #E2E2E2; height:100%; overflow:auto;}
+		.mapContent {width:100%; height:95%;}
 		
 	</style>
 	
 	<link rel="stylesheet" href="${path}/resources/css/moduleStyle.css">
+	<link rel="stylesheet" href="${path}/resources/css/common.css">
+	<link rel="stylesheet" href="${path}/resources/css/mapStyle.css">
 		
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="${path}/resources/js/search.js" type="text/javascript" defer="defer"></script>
@@ -24,28 +26,33 @@
 	
 </head>
 <body>
-	<div id="totalContainer">
+	<div class="totalContainer">
 		<%@ include file="../module/side.jsp" %>
 		
-		<div id="bmkCtgry">			
+		<div class="main-content">
+			<div id="bmkCtgry-wrapper">			
+				<div class="sub-wrapper">
+					<h3 class="menu-name">전체 카테고리</h3>
+					<h4 id="bmkListRemove">X</h4>
+				</div>				
+				<br>
+				<div id="bmkCtgry-list">
+					<ol>
+						<c:forEach items="${ctgryNmList}" var="resultList" varStatus="status">
+						<li><a href="/map/bmkListByCtgry?ctgryNm=${ctgryNmList[status.index]}"> ${ctgryNmList[status.index]}</a></li>
+						</c:forEach>
+					</ol>
+				</div><!-- bmkCtgry-list -->
+				
+				
+			</div><!-- //bmkCtgry-wrapper -->			
 			
-			<h3>전체 카테고리</h3>
-			<h4 id="bmkListRemove">X</h4>
-			<br>
-			<ol>
-				<c:forEach items="${ctgryNmList}" var="resultList" varStatus="status">
-				<li><a href="/map/bmkListByCtgry?ctgryNm=${ctgryNmList[status.index]}"> ${ctgryNmList[status.index]}</a></li>
-				</c:forEach>
-			</ol>
-			
-		</div><!-- //bmkCtgry -->
-		
-		
-		<div id="mapContent">
-			<div id="map" style="width:100%;height:100%;"></div>
-			<button type="button" id="currentPosition" onclick="goCurrentPosition()">현위치</button>
-			<button type="button" id="categoryList">목록 보기</button>
-		</div>	<!-- mapContent -->
+			<div class="mapContent">
+				<div id="map" style="width:100%;height:100%;"></div>
+				<button type="button" id="currentPosition" onclick="goCurrentPosition()">현위치</button>
+				<button type="button" id="categoryList">목록 보기</button>
+			</div>	<!-- mapContent -->
+		</div>	<!-- main-content -->	
 			
 	</div><!-- totalContainer -->
 	
@@ -56,13 +63,13 @@
 	var categoryList = document.querySelector('#categoryList');
 	
 	bmkListRemove.addEventListener('click', function(){
-		var slideDiv = document.querySelector('#bmkCtgry');		
+		var slideDiv = document.querySelector('#bmkCtgry-wrapper');		
 		slideDiv.style.display = 'none';
 		categoryList.style.display = 'block';
 	})
 	
 	categoryList.addEventListener('click', function(){
-		var slideDiv = document.querySelector('#bmkCtgry');		
+		var slideDiv = document.querySelector('#bmkCtgry-wrapper');		
 		slideDiv.style.display = 'block';
 		categoryList.style.display = 'none';
 	})

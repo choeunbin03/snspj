@@ -11,7 +11,7 @@
 			WHERE MBR_ID = #{mbrId} AND BBS_ID = #{bbsId})
 	</select>
 	
-	<update id="updateBbsSpt" parameterType="java.lang.Integer">
+	<update id="addBbsSpt" parameterType="java.lang.Integer">
 		UPDATE TB_BBS
 		SET
 			BBS_SPT_CNT = IFNULL(BBS_SPT_CNT, 0) + 1
@@ -19,7 +19,7 @@
 			BBS_ID = #{bbsId}
 	</update>
 	
-	<insert id="insertSptTb" parameterType="HashMap">
+	<insert id="addSpt" parameterType="HashMap">
 		INSERT INTO TB_SPT
 		(
 			BBS_ID,
@@ -29,5 +29,47 @@
 				#{mbrId}	
 		)	
 	</insert>
+	
+	<update id="removeBbsSpt" parameterType="java.lang.Integer">
+		UPDATE TB_BBS
+		SET
+			BBS_SPT_CNT = BBS_SPT_CNT - 1
+		WHERE
+			BBS_ID = #{bbsId}
+	</update>
+	
+	<delete id="removeSpt" parameterType="HashMap">
+		DELETE FROM TB_SPT
+		WHERE MBR_ID=#{mbrId} AND BBS_ID=#{bbsId}	
+	</delete>
+	
+	<select id="sptYnBbsList" resultType="java.lang.String" parameterType="HashMap">
+		SELECT CASE WHEN B.MBR_ID = #{mbrId} THEN 'Y' ELSE 'N' END AS sptYn
+		FROM
+		(
+			SELECT A.*
+			FROM TB_BBS A
+			WHERE RGTR_ID IN
+				(
+					SELECT A.FLWR_ID
+					FROM TB_FLLW A
+					WHERE MBR_ID = #{mbrId}
+				)				
+		) A
+		LEFT JOIN TB_SPT B ON B.BBS_ID = A.BBS_ID
+		ORDER BY A.BBS_ID DESC
+	</select>
+	
+	<select id="sptYnSrch" resultType="java.lang.String" parameterType="HashMap">
+		SELECT CASE WHEN B.MBR_ID = #{mbrId} THEN 'Y' ELSE 'N' END AS sptYn
+		FROM
+		(
+			SELECT A.*
+			FROM TB_BBS A
+			WHERE RGTR_ID = #{keyWd}				
+		) A
+		LEFT JOIN TB_SPT B ON B.BBS_ID = A.BBS_ID
+		ORDER BY A.BBS_ID DESC
+	</select>
 	
 </mapper>

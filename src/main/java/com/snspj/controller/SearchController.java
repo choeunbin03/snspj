@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.snspj.domain.MemberDTO;
+import com.snspj.service.BookmarkService;
 import com.snspj.service.SearchService;
+import com.snspj.service.SptService;
 import com.snspj.util.FileUtil;
 
 import java.io.File;
@@ -43,6 +45,10 @@ public class SearchController {
 	
 	@Inject
 	private SearchService srchService;
+	@Inject
+	private SptService sptService;
+	@Inject
+	private BookmarkService bookmarkService;
 	
 	@RequestMapping(value = "/srchArea", method = RequestMethod.GET)
 	public String goSrchArea(Locale locale, Model model){
@@ -50,20 +56,34 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value = "/srchPrsn", method = RequestMethod.GET)
-	public ModelAndView srchPrsn(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public ModelAndView srchPrsn(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+		String keyWd = (request.getParameter("keyWd")).substring(1);
+		String mbrId = (String)session.getAttribute("sessionId");	
 		
-		String keyWd = (request.getParameter("keyWd")).substring(1);		
-		
-		MemberDTO srchMbrInfo = srchService.getMbrInfo(keyWd);
-		
-		List bbsList = srchService.getMbrBbsList(keyWd);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("keyWd", keyWd);
+		params.put("mbrId", mbrId);
 		
 		ModelAndView mv = new ModelAndView();
+		
+		//검색 상대 프로필 정보
+		MemberDTO srchMbrInfo = srchService.getMbrInfo(keyWd);
+		//팔로우 여부 체크
+		
+		
+		//검색 상대의 게시글 리스트
+		List bbsList = srchService.getMbrBbsList(keyWd);
+		//좋아요 여부 체크
+		List sptYn = sptService.sptYnSrch(params);
+		//북마크 여부 체크
+		List bmkYn = bookmarkService.bmkYnSrch(params);
+
 		mv.setViewName("/search/srchPrsn");
 		mv.addObject("keyWd", keyWd);
 		mv.addObject("srchMbrInfo", srchMbrInfo);
 		mv.addObject("bbsList", bbsList);
-
+		mv.addObject("sptYn", sptYn);
+		mv.addObject("bmkYn", bmkYn);
 		
 		return mv;
 	}

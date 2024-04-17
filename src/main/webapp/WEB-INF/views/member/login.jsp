@@ -11,7 +11,7 @@
 
 <title>로그인</title>
 
-<link rel="stylesheet" href="${path}/resources/css/common.css">
+<!-- <link rel="stylesheet" href="${path}/resources/css/common.css">	-->
 <link rel="stylesheet" href="${path}/resources/css/loginStyle.css">
 </head>
 <body class="flex-center">	

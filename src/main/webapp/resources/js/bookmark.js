@@ -18,18 +18,42 @@ function fn_addBookmark(bmkParam, cnt){
 	});
 }
 
-function fn_bmkBbs(bbsId){
+function fn_bmkBbs(bbsId, bmkYn, index){
+	var funcType = null;
 	
-	$.ajax({
-		type: "GET",
-		url: "/bookmark/bmkBbs",
-		data: {bbsId: bbsId},
-		success: function(data){
-			location.reload();
-		},
-		error: function(data){
-			alert("실패");
-			console.log(data);
-		}
-	});
+	if(bmkYn == 'N'){//북마크 add
+		funcType = "add";
+		$.ajax({
+			type : "POST",
+			url : "/bookmark/bmkBbs",
+			data : {bbsId: bbsId, funcType: funcType},
+			success : function(data){
+				//location.reload();
+				//console.log("하트 add");
+				$(".feed-bmk-wrapper"+index).load(location.href + " .feed-bmk-wrapper"+index);	//부분 업데데이트
+			},
+			error : function(data){
+				alert("실패");
+				console.log(data);
+			}
+		});
+
+	}else{//북마크 remove
+		funcType = "remove";
+		$.ajax({
+			type : "POST",
+			url : "/bookmark/bmkBbs",
+			data : {bbsId: bbsId, funcType: funcType},
+			success : function(data){
+				//location.reload();
+				//console.log("하트 remove");
+				$(".feed-bmk-wrapper"+index).load(location.href + " .feed-bmk-wrapper"+index);
+			},
+			error : function(data){
+				alert("실패");
+				console.log(data);
+			}
+		});
+
+	}
 }

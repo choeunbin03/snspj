@@ -28,6 +28,7 @@
 			MDFR_DT       AS mdfrDt
 		FROM	TB_BBS
 		WHERE	RGTR_ID = #{keyWd}
+		ORDER BY BBS_ID DESC
 	</select>
 
 </mapper>

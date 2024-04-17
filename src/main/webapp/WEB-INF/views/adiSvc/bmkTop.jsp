@@ -15,6 +15,7 @@
 	</style>
 	
 	<link rel="stylesheet" href="${path}/resources/css/moduleStyle.css">
+	<link rel="stylesheet" href="${path}/resources/css/common.css">
 		
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="${path}/resources/js/search.js" type="text/javascript" defer="defer"></script>
@@ -27,35 +28,39 @@
 	<div id="totalContainer">
 		<%@ include file="../module/side.jsp" %>
 		
-		<div id="bmkTopList">			
+		<div class="main-content">
+			<div id="bmkTopList">			
+				
+				<h3>저장 TOP</h3>
+				<br>
+				<table>
+					<tbody>
+						<c:forEach items="${bmkTopList}" var="bmkTopList" varStatus="status">
+							<tr>
+								<td>
+								<a href="#" onclick="panTo(${bmkTopList.x}, ${bmkTopList.y})">
+									<span id="bmkItem"></span>
+									<div>${bmkTopList.place_name}</div>
+									<div>${bmkTopList.road_address_name}</div>
+									<div>${bmkTopList.address_name}</div>
+									<div>${bmkTopList.phone}</div>
+									<button type="button" onclick='fn_addBookmark(${jsonResult}, ${status.index})'>북마크</button>
+								</a>
+								</td>								
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				
+			</div><!-- //bmkCtgry -->
 			
-			<h3>저장 TOP</h3>
-			<br>
-			<table>
-				<tbody>
-					<c:forEach items="${bmkTopList}" var="bmkTopList" varStatus="status">
-						<tr>
-							<td>
-							<a href="#" onclick="panTo(${bmkTopList.x}, ${bmkTopList.y})">
-								<span id="bmkItem"></span>
-								<div>${bmkTopList.place_name}</div>
-								<div>${bmkTopList.road_address_name}</div>
-								<div>${bmkTopList.address_name}</div>
-								<div>${bmkTopList.phone}</div>
-								<button type="button" onclick='fn_addBookmark(${jsonResult}, ${status.index})'>북마크</button>
-							</a>
-							</td>								
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
 			
-		</div><!-- //bmkCtgry -->
+			<div id="mapContent">
+				<div id="map" style="width:100%;height:100%;"></div>
+			</div>	<!-- mapContent -->
+		</div><!-- "main-content" -->
 		
 		
-		<div id="mapContent">
-			<div id="map" style="width:100%;height:100%;"></div>
-		</div>	<!-- mapContent -->
 			
 	</div><!-- totalContainer -->
 	

@@ -51,7 +51,7 @@
 		LIMIT 15
 	</select>
 	
-	<insert id="bmkBbs" parameterType="HashMap">
+	<insert id="addBmkBbs" parameterType="HashMap">
 		INSERT INTO TB_BMK
 		( 
 			MBR_ID,
@@ -72,5 +72,41 @@
 				#{mbrId},
 				now()
 		)
-	</insert>
+	</insert>	
+	
+	<delete id="removeBmkBbs" parameterType="HashMap">
+		DELETE FROM TB_BMK
+		WHERE MBR_ID=#{mbrId} AND BMK_CN=#{bbsId}	
+	</delete>
+	
+	<select id="bmkYnBbsList" resultType="java.lang.String" parameterType="HashMap">
+		SELECT CASE WHEN B.MBR_ID = #{mbrId} THEN 'Y' ELSE 'N' END AS bmkYn
+		FROM
+		(
+			SELECT A.*
+			FROM TB_BBS A
+			WHERE RGTR_ID IN
+				(
+					SELECT A.FLWR_ID
+					FROM TB_FLLW A
+					WHERE MBR_ID = #{mbrId}
+				)				
+		) A
+		LEFT JOIN TB_BMK B ON B.BMK_CN = A.BBS_ID
+		ORDER BY A.BBS_ID DESC
+	</select>
+	
+	<select id="bmkYnSrch" resultType="java.lang.String" parameterType="HashMap">
+		SELECT CASE WHEN B.MBR_ID = #{mbrId} THEN 'Y' ELSE 'N' END AS bmkYn
+		FROM
+		(
+			SELECT A.*
+			FROM TB_BBS A
+			WHERE RGTR_ID = #{keyWd}			
+		) A
+		LEFT JOIN TB_BMK B ON B.BMK_CN = A.BBS_ID
+		ORDER BY A.BBS_ID DESC
+	</select>
+	
+	
 </mapper>

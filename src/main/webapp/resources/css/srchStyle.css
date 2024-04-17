@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+.logo-wrapper{
+	width: 200px;
+    height: 100px;
+    position: relative;
+    align-content: center;
+    box-sizing: border-box;
+    float: left;
+}
+
+#srchContent{
+	top: 100px;
+    border: none;
+    /* margin: 20px; */
+    float: left;
+    width: 300px;
+    height: 100%;
+    padding-left: 40px;
+    /* justify-content: center; */
+    /* align-items: center; */
+    box-sizing: border-box;
+    position: fixed;
+    border-right: 1px solid #c0c0c0;
+}
+
+
+.main-content {
+    left: 100px;
+    width: calc(100% - 100px);
+    display: flex;
+    position: absolute;
+    background: white;
+    height: 100%;
+}

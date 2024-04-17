@@ -15,7 +15,7 @@
 		.img_wrapper {width:150px; height:150px; overflow:hidden; margin:0 auto;}
 		.profileImg {width:100%; height:100%; border:none;}
 	</style>
-	<link rel="stylesheet" href="${path}/resources/css/common.css">
+	<!-- <link rel="stylesheet" href="${path}/resources/css/common.css">	-->
 	<link rel="stylesheet" href="${path}/resources/css/joinStyle.css">
 
 </head>

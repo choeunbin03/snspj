@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.main-content {
+    left: 100px;
+    height: 100%;
+    width: calc(100% - 100px);
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    background: white;
+}
+
+.sub-wrapper {
+	padding: 5px;
+	display: flex;
+	box-sizing: border-box;
+}
+
+.menu-name{
+	float: left;
+	margin: 5px;
+}
+
+#bmkListRemove{
+	float: right;
+	margin: 5px;
+}

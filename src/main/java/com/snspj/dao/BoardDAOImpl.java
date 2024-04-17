@@ -31,5 +31,16 @@ public class BoardDAOImpl implements BoardDAO{
 		return bbsView;
 	}
 
+	@Override
+	public void regiBbs(BoardDTO boardDto) {
+		sqlSession.insert(namespace + ".regiBbs", boardDto);
+	}
+
+	@Override
+	public int getMaxBbsId() {
+		int result = sqlSession.selectOne(namespace + ".getMaxBbsId");
+		return result;
+	}
+
 	
 }

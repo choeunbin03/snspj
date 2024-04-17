@@ -45,8 +45,26 @@ public class BookmarkServiceImpl implements BookmarkService{
 	}
 
 	@Override
-	public void bmkBbs(Map<String, Object> bmkParam) {
-		bookmarkDao.bmkBbs(bmkParam);
+	public void addBmkBbs(Map<String, Object> params) {
+		bookmarkDao.addBmkBbs(params);
 	}
+
+	@Override
+	public void removeBmkBbs(Map<String, Object> params) {
+		bookmarkDao.removeBmkBbs(params);
+	}
+	
+	@Override
+	public List<String> bmkYnBbsList(Map<String, Object> params) {
+		List<String> result = bookmarkDao.bmkYnBbsList(params);	
+		return result;
+	}
+
+	@Override
+	public List<String> bmkYnSrch(Map<String, Object> params) {
+		List<String> result = bookmarkDao.bmkYnSrch(params);	
+		return result;
+	}
+
 	
 }

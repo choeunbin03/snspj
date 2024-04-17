@@ -1,0 +1,5 @@
+#aws 정보 ignore
+application.properties
+
+#kakao.properties ignore
+kakao.properties
